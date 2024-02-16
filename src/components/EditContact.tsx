@@ -13,6 +13,16 @@ const EditContact = ({ editContact }) => {
   const [firstNameError, setFirstNameError] = useState("");
   const [lastNameError, setLastNameError] = useState("");
 
+  function handleInputChange(identifier, value) {
+    if (identifier === "firstName") {
+      setFirstName(value);
+      setFirstNameError("");
+    } else {
+      setLastName(value);
+      setLastNameError("");
+    }
+  }
+
   const handleEditContact = () => {
     let isValid = true;
 
@@ -43,8 +53,9 @@ const EditContact = ({ editContact }) => {
         <label>New First Name: </label>
         <input
           type="text"
+          placeholder="John"
           value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
+          onChange={(e) => handleInputChange("firstName", e.target.value)}
         />
         {firstNameError && <p>{firstNameError}</p>}
       </div>
@@ -52,8 +63,9 @@ const EditContact = ({ editContact }) => {
         <label>New Last Name: </label>
         <input
           type="text"
+          placeholder="Doe"
           value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+          onChange={(e) => handleInputChange("lastName", e.target.value)}
         />
         {lastNameError && <p>{lastNameError}</p>}
       </div>

@@ -65,8 +65,6 @@ const CreateContactPage = ({ addContact }) => {
         <input
           required
           type="text"
-          minLength={3}
-          maxLength={25}
           placeholder="John"
           value={firstName}
           onChange={(e) => handleInputChange("firstName", e.target.value)}
@@ -77,8 +75,6 @@ const CreateContactPage = ({ addContact }) => {
         <label>Last Name: </label>
         <input
           type="text"
-          minLength={2}
-          maxLength={30}
           placeholder="Doe"
           value={lastName}
           onChange={(e) => handleInputChange("lastName", e.target.value)}
