@@ -10,16 +10,30 @@ const EditContact = ({ editContact }) => {
 
   const [firstName, setFirstName] = useState(contact?.firstName);
   const [lastName, setLastName] = useState(contact?.lastName);
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
 
   const handleEditContact = () => {
-    if (firstName) {
+    let isValid = true;
+
+    if (!firstName || firstName.length < 3 || firstName.length > 25) {
+      setFirstNameError("First name must be between 3 and 25 characters");
+      isValid = false;
+    }
+
+    if (lastName && (lastName.length < 2 || lastName.length > 30)) {
+      setLastNameError("Last name must be between 2 and 30 characters");
+      isValid = false;
+    }
+
+    if (isValid) {
       editContact({
         ...contact,
         firstName: firstName,
         lastName: lastName,
       });
+      navigate("/");
     }
-    navigate("/");
   };
 
   return (
@@ -32,6 +46,7 @@ const EditContact = ({ editContact }) => {
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
+        {firstNameError && <p>{firstNameError}</p>}
       </div>
       <div>
         <label>New Last Name: </label>
@@ -40,6 +55,7 @@ const EditContact = ({ editContact }) => {
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
+        {lastNameError && <p>{lastNameError}</p>}
       </div>
       <div>
         <label>Email: </label>

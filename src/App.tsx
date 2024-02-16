@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import MainPage from "./components/MainPage";
-import CreateContactPage from "./components/CreateContactPage";
+import CreateContactPage from "./components/CreateContact";
 import EditContact from "./components/EditContact";
 import { mockContacts } from "./mockData";
 
