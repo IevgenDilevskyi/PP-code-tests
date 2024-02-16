@@ -5,15 +5,15 @@ const MainPage = ({ contacts, removeContact }) => {
   return (
     <div>
       <h1>Contact List</h1>
-      {/* <ul>
+      <ul>
         {contacts.map((contact, index) => (
           <Contact
-            key={index}
+            key={contact.email}
             contact={contact}
             removeContact={removeContact}
           />
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 };

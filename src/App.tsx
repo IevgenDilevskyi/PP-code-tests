@@ -1,9 +1,9 @@
-// import "./App.css";
+import "./App.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import MainPage from "./components/MainPage";
 import CreateContactPage from "./components/CreateContactPage";
-import EditContactPage from "./components/EditContactPage";
+import EditContact from "./components/EditContact";
 import { mockContacts } from "./mockData";
 
 interface Contact {
@@ -16,19 +16,6 @@ const App = () => {
   const [contacts, setContacts] = useState<Contact[]>([]);
 
   useEffect(() => {
-    // const storedContacts = JSON.parse(localStorage.getItem("contacts"));
-    // if (storedContacts) {
-    //   setContacts(storedContacts);
-    // }
-    // else {
-    // fetch("/path-to-your/defaultData.json")
-    //   .then((response) => response.json())
-    //   .then((defaultData) => {
-    //     setContacts(defaultData);
-    //     localStorage.setItem("contacts", JSON.stringify(defaultData));
-    //   })
-    //   .catch((error) => console.error("Error loading default data:", error));
-    // // }
     setContacts(mockContacts);
     localStorage.setItem("contacts", JSON.stringify(mockContacts));
   }, []);
@@ -71,20 +58,31 @@ const App = () => {
           </ul>
         </nav>
         <Routes>
-          <Route path="/">
-            <MainPage contacts={contacts} removeContact={removeContact} />
-          </Route>
-          {/* <Route path="/create"> */}
-          {/* <CreateContactPage addContact={addContact} /> */}
-          {/* <div>CREATEPAGE</div>
-          </Route> */}
-          {/* <Route path="/edit/:email">
-            {(match) => {
+          <Route
+            path="/"
+            element={
+              <MainPage contacts={contacts} removeContact={removeContact} />
+            }
+          />
+          <Route
+            path="/create"
+            element={<CreateContactPage addContact={addContact} />}
+          />
+          <Route
+            path="/edit/:email"
+            element={
+              <EditContact
+                // contact={contacts[0]}
+                editContact={editContact}
+              />
+            }
+          />
+          {/* {(match) => {
               const contact = contacts.find(
                 (c) => c.email === match.params.email
               );
               return contact ? (
-                <EditContactPage contact={contact} editContact={editContact} />
+                <EditContact contact={contact} editContact={editContact} />
               ) : null;
             }}
           </Route> */}
