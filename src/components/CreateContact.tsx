@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const CreateContact = ({ addContact }) => {
   const navigate = useNavigate();
+  const storedContacts = JSON.parse(localStorage.getItem("contacts") ?? "[]");
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -41,8 +42,13 @@ const CreateContact = ({ addContact }) => {
       isValid = false;
     }
 
-    if (!email || !validateEmail(email)) {
+    if (!email || !validateEmailFormat(email)) {
       setEmailError("Please enter a valid email address");
+      isValid = false;
+    }
+
+    if (emailExists(email)) {
+      setEmailError("Contact with this Email already exists");
       isValid = false;
     }
 
@@ -55,9 +61,13 @@ const CreateContact = ({ addContact }) => {
     }
   };
 
-  function validateEmail(email) {
+  function validateEmailFormat(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  }
+
+  function emailExists(email) {
+    return storedContacts.some((contact) => contact.email === email);
   }
 
   return (
