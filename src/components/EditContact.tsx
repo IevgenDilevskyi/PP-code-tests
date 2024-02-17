@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { mockContacts } from "../mockData";
 
 const EditContact = ({ editContact }) => {
   const navigate = useNavigate();
@@ -47,33 +46,58 @@ const EditContact = ({ editContact }) => {
   };
 
   return (
-    <div>
-      <h1>Edit Contact</h1>
-      <div>
-        <label>New First Name: </label>
+    <div className="mt-8 max-w-screen-md mx-auto">
+      <h1 className="text-3xl font-bold mb-4 text-stone-800">Edit Contact</h1>
+      <div className="mb-4">
+        <label className="block text-stone-600">
+          New First Name <span className=" text-red-600">*</span>
+        </label>
         <input
           type="text"
           placeholder="John"
           value={firstName}
           onChange={(e) => handleInputChange("firstName", e.target.value)}
+          className="p-2 border rounded-md focus:outline-none focus:border-blue-500"
         />
-        {firstNameError && <p>{firstNameError}</p>}
+        {firstNameError && <p className="text-red-500">{firstNameError}</p>}
       </div>
-      <div>
-        <label>New Last Name: </label>
+      <div className="mb-4">
+        <label className="block text-stone-600">New Last Name</label>
         <input
           type="text"
           placeholder="Doe"
           value={lastName}
           onChange={(e) => handleInputChange("lastName", e.target.value)}
+          className="p-2 border rounded-md focus:outline-none focus:border-blue-500"
         />
-        {lastNameError && <p>{lastNameError}</p>}
+        {lastNameError && <p className="text-red-500">{lastNameError}</p>}
       </div>
-      <div>
-        <label>Email: </label>
-        <input type="text" value={contact?.email} disabled />
+      <div className="mb-4">
+        <label className="block text-stone-600">
+          Email <span className=" text-red-600">*</span>
+        </label>
+        <input
+          type="email"
+          value={contact?.email}
+          disabled
+          className="p-2 border rounded-md bg-gray-200 cursor-not-allowed"
+        />
       </div>
-      <button onClick={handleEditContact}>Save Changes</button>
+      <p className="mb-2 text-gray-500">
+        <span className=" text-red-600">*</span> Required field
+      </p>
+      <button
+        onClick={() => navigate("/")}
+        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mx-2"
+      >
+        Cancel
+      </button>
+      <button
+        onClick={handleEditContact}
+        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mx-2"
+      >
+        Save Changes
+      </button>
     </div>
   );
 };

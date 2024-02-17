@@ -1,4 +1,3 @@
-// mockData.ts
 export interface Contact {
   firstName: string;
   lastName: string;

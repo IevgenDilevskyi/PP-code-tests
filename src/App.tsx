@@ -1,8 +1,7 @@
-import "./App.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import MainPage from "./components/MainPage";
-import CreateContactPage from "./components/CreateContact";
+import ContactList from "./components/ContactList";
+import CreateContact from "./components/CreateContact";
 import EditContact from "./components/EditContact";
 import { mockContacts } from "./mockData";
 
@@ -48,44 +47,30 @@ const App = () => {
     <Router>
       <div>
         <nav>
-          <ul>
-            <li>
+          <ul className="flex gap-4 justify-end mb-16 text-2xl font-medium uppercase">
+            <button className=" rounded px-2 text-amber-400 hover:text-amber-500 bg-stone-800">
               <Link to="/">Home</Link>
-            </li>
-            <li>
+            </button>
+            <button className=" rounded px-2 text-amber-400 hover:text-amber-500 bg-stone-800">
               <Link to="/create">Create Contact</Link>
-            </li>
+            </button>
           </ul>
         </nav>
         <Routes>
           <Route
             path="/"
             element={
-              <MainPage contacts={contacts} removeContact={removeContact} />
+              <ContactList contacts={contacts} removeContact={removeContact} />
             }
           />
           <Route
             path="/create"
-            element={<CreateContactPage addContact={addContact} />}
+            element={<CreateContact addContact={addContact} />}
           />
           <Route
             path="/edit/:email"
-            element={
-              <EditContact
-                // contact={contacts[0]}
-                editContact={editContact}
-              />
-            }
+            element={<EditContact editContact={editContact} />}
           />
-          {/* {(match) => {
-              const contact = contacts.find(
-                (c) => c.email === match.params.email
-              );
-              return contact ? (
-                <EditContact contact={contact} editContact={editContact} />
-              ) : null;
-            }}
-          </Route> */}
         </Routes>
       </div>
     </Router>

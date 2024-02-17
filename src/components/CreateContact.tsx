@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const CreateContactPage = ({ addContact }) => {
+const CreateContact = ({ addContact }) => {
+  const navigate = useNavigate();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -58,45 +61,67 @@ const CreateContactPage = ({ addContact }) => {
   }
 
   return (
-    <div>
-      <h1>Create Contact</h1>
-      <div>
-        <label>First Name *: </label>
+    <div className="max-w-screen-md mx-auto mt-4">
+      <h1 className="uppercase my-4 font-bold text-3xl text-stone-800">
+        Create Contact
+      </h1>
+      <div className="mb-4">
+        <label className="block text-stone-600">
+          First Name <span className=" text-red-600">*</span>
+        </label>
         <input
           required
           type="text"
           placeholder="John"
           value={firstName}
           onChange={(e) => handleInputChange("firstName", e.target.value)}
+          className="border p-2 rounded-md"
         />
-        {firstNameError && <p>{firstNameError}</p>}
+        {firstNameError && <p className="text-red-500">{firstNameError}</p>}
       </div>
-      <div>
-        <label>Last Name: </label>
+      <div className="mb-4">
+        <label className="block text-stone-600">Last Name</label>
         <input
           type="text"
           placeholder="Doe"
           value={lastName}
           onChange={(e) => handleInputChange("lastName", e.target.value)}
+          className="border p-2 rounded-md"
         />
-        {lastNameError && <p>{lastNameError}</p>}
+        {lastNameError && <p className="text-red-500">{lastNameError}</p>}
       </div>
-      <div>
-        <label>Email *: </label>
+      <div className="mb-4">
+        <label className="block text-stone-600">
+          Email <span className=" text-red-600">*</span>
+        </label>
         <input
           required
           type="email"
           placeholder="j.doe@example.com"
           value={email}
           onChange={(e) => handleInputChange("email", e.target.value)}
+          className="border p-2 rounded-md"
         />
-        {emailError && <p>{emailError}</p>}
+        {emailError && <p className="text-red-500">{emailError}</p>}
       </div>
-      <p>* Required field</p>
-      <button onClick={handleCreateContact}>Create Contact</button>
-      {resultMsg && <p>{resultMsg}</p>}
+      <p className="mb-2 text-gray-500">
+        <span className=" text-red-600">*</span> Required field
+      </p>
+      <button
+        onClick={() => navigate("/")}
+        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mx-2"
+      >
+        Cancel
+      </button>
+      <button
+        onClick={handleCreateContact}
+        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mx-2"
+      >
+        Create Contact
+      </button>
+      {resultMsg && <p className="mt-2">{resultMsg}</p>}
     </div>
   );
 };
 
-export default CreateContactPage;
+export default CreateContact;
